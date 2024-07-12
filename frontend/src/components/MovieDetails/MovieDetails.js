@@ -10,7 +10,6 @@ const MovieDetails = () => {
 
 
   useEffect(() => {
-    console.log("je l hne 1")
     dispatch(getMovie(id));
 
   }, [dispatch, id]);
