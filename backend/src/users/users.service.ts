@@ -22,5 +22,11 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-
+  async findByUsername(username: string): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { username } });
+  }
+  
+  async findById(id: number): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { id } });
+  }
 }
