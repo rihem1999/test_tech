@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const favorite_movies_service_1 = require("./favorite-movies.service");
 const create_favorite_movie_dto_1 = require("./dto/create-favorite-movie.dto");
 const update_favourite_movie_dto_1 = require("./dto/update-favourite-movie.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let FavoriteMoviesController = class FavoriteMoviesController {
     constructor(favoriteMoviesService) {
         this.favoriteMoviesService = favoriteMoviesService;
@@ -39,6 +40,7 @@ let FavoriteMoviesController = class FavoriteMoviesController {
 };
 exports.FavoriteMoviesController = FavoriteMoviesController;
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -46,12 +48,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FavoriteMoviesController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], FavoriteMoviesController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -59,6 +63,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FavoriteMoviesController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -67,6 +72,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FavoriteMoviesController.prototype, "update", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

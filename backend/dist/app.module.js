@@ -9,25 +9,38 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
 const favourite_movie_entity_1 = require("./favorite-movies/favourite-movie.entity");
 const favorite_movies_module_1 = require("./favorite-movies/favorite-movies.module");
+const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
+const user_entity_1 = require("./users/user.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: 'Rihem_8520',
-                database: 'favourite_movies_db',
-                entities: [favourite_movie_entity_1.FavoriteMovie],
-                synchronize: true,
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: (configService) => ({
+                    type: 'postgres',
+                    host: configService.get('DATABASE_HOST'),
+                    port: configService.get('DATABASE_PORT'),
+                    username: configService.get('DATABASE_USER'),
+                    password: configService.get('DATABASE_PASSWORD'),
+                    database: configService.get('DATABASE_NAME'),
+                    entities: [favourite_movie_entity_1.FavoriteMovie, user_entity_1.User],
+                    synchronize: true,
+                }),
+                inject: [config_1.ConfigService],
             }),
             favorite_movies_module_1.FavoriteMoviesModule,
+            auth_module_1.AuthModule,
+            users_module_1.UsersModule
         ],
     })
 ], AppModule);
