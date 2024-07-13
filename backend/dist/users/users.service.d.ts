@@ -6,4 +6,6 @@ export declare class UsersService {
     constructor(usersRepository: Repository<User>);
     findOne(username: string): Promise<User | undefined>;
     create(createUserDto: CreateUserDto): Promise<User>;
+    findByUsername(username: string): Promise<User | undefined>;
+    findById(id: number): Promise<User | undefined>;
 }

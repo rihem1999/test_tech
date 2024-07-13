@@ -28,6 +28,12 @@ let UsersService = class UsersService {
         const user = this.usersRepository.create(createUserDto);
         return this.usersRepository.save(user);
     }
+    async findByUsername(username) {
+        return this.usersRepository.findOne({ where: { username } });
+    }
+    async findById(id) {
+        return this.usersRepository.findOne({ where: { id } });
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
